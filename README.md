@@ -16,37 +16,37 @@ This program requires administrator rights.
 
 Put the `WinRing0x64.dll` and `WinRing0x64.sys` (included in the release section of this repository) in the same folder as this program.
 
-- `IntelVoltageControl show`
+- `IntelVoltageControl show`  
   Show all currently configured FIVR offsets.
-- `IntelVoltageControl set [--allow-overvolt] [--commit] ([plane_number] [voltage_offset])...`
+- `IntelVoltageControl set [--allow-overvolt] [--commit] ([plane_number] [voltage_offset])...`  
   Apply the FIVR offset to the specified control planes.
-  - `--allow-overvolt`
+  - `--allow-overvolt`  
     Specify to set positive voltage offset.
-  - `--commit`
+  - `--commit`  
     Actually apply the FIVR offset setting instead of "dry-run".
-  - `plane_number`
+  - `plane_number`  
     The FIVR control plane number to configure. See next section.
-  - `voltage_offset`
+  - `voltage_offset`  
     The voltage offset, in mV (millivolt).
 
 ### Example
 
-- To undervolt CPU core and iGPU core by 100 mV and 50 mV respectively:
+- To undervolt CPU core and iGPU core by 100 mV and 50 mV respectively:  
   `IntelVoltageControl set --commit 0 -100 1 -50`
-- To reset iGPU unslice voltage offset and keep other offsets intact:
+- To reset iGPU unslice voltage offset and keep other offsets intact:  
   `IntelVoltageControl set --commit 4 0`
 
 ## Control Plane
 
 The FIVR in the Intel CPU regulates voltages for many SoC components. These voltages can be controlled separately by selecting the correct control plane number. A known control plane numbers for Skylake Y/U/H/S are:
 
-- 0
+- 0  
   CPU core.
-- 1
+- 1  
   Integrated GPU compute unit (slice).
-- 2
+- 2  
   CPU caches.
-- 3
+- 3  
   Skylake system agent, which includes I/O bus and display engine.
-- 4
+- 4  
   Integrated GPU unslice. Contains non-compute GPU parts such as QuickSync, video decoder, and other fixed function hardware.
