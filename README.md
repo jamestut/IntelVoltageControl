@@ -4,6 +4,8 @@ This command line application allows setting up FIVR voltage offset directly fro
 
 As this program is command line and applies changes immediately, it is perfect for use as part of automating voltage offset settings, for instance, by using Windows' scheduled tasks. An example use case is that a certain voltage offset might work perfectly on a system when it is being actively used, but might crash the system once it enters modern standby.
 
+Note that this software operates by writing to MSR `0x150`, just like many undervolting utilities do. If other utilities cannot change the voltage offsets, then this software will not work either. In particular, on Skylake based systems with newer firmware that have the "mitigation" for the [Plundervolt](https://plundervolt.com/) vulnerability, the firmware might lock the ability to modify the voltage offset. Some of such firmware allows voltage offset control to be enabled again by disabling both "CFG lock" and "overclocking lock" settings.
+
 ## Disclaimer
 
 Since this software modifies hardware parameters, system crash might occur, or in the case of overvolting, system damage.
