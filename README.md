@@ -34,7 +34,7 @@ Put the `WinRing0x64.dll` and `WinRing0x64.sys` (included in the release section
 ### Example
 
 - To undervolt CPU core and iGPU core by 100 mV and 50 mV respectively:  
-  `IntelVoltageControl set --commit 0 -100 1 -50`
+  `IntelVoltageControl set --commit 0 -100 1 -50 2 -100`
 - To reset iGPU unslice voltage offset and keep other offsets intact:  
   `IntelVoltageControl set --commit 4 0`
 
@@ -52,3 +52,5 @@ The FIVR in the Intel CPU regulates voltages for many SoC components. These volt
   Skylake system agent, which includes I/O bus and display engine.
 - 4  
   Integrated GPU unslice. Contains non-compute GPU parts such as QuickSync, video decoder, and other fixed function hardware.
+
+Note that for at least Skylake and its derivatives (Kaby Lake, Coffee Lake, Comet Lake, and so on), plane 0 and 2 are tied. Therefore to set the voltage offset for the CPU core (plane 0), plane 2 (CPU cache) has to be set to the same voltage offset as well, otherwise the set voltage offset will not take any effect.
